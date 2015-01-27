@@ -1,0 +1,43 @@
+8
+
+dir
+128
+http://slackers-qvm.googlecode.com/svn/trunk/src
+http://slackers-qvm.googlecode.com/svn
+
+
+
+2010-02-06T04:14:24.914511Z
+128
+slackerlinux85
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+55599770-6f59-11de-83c4-53937bf5378e
+
+tools
+dir
+
+qcommon
+dir
+
+game
+dir
+
+cgame
+dir
+
+ui
+dir
+

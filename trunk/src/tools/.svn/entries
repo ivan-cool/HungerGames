@@ -1,0 +1,34 @@
+8
+
+dir
+128
+http://slackers-qvm.googlecode.com/svn/trunk/src/tools
+http://slackers-qvm.googlecode.com/svn
+
+
+
+2009-07-13T03:23:39.497349Z
+2
+SlackerLinux85
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+55599770-6f59-11de-83c4-53937bf5378e
+
+asm
+dir
+
+lcc
+dir
+
