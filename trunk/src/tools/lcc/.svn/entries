@@ -1,103 +1,0 @@
-8
-
-dir
-128
-http://slackers-qvm.googlecode.com/svn/trunk/src/tools/lcc
-http://slackers-qvm.googlecode.com/svn
-
-
-
-2009-07-13T03:23:39.497349Z
-2
-SlackerLinux85
-
-
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-55599770-6f59-11de-83c4-53937bf5378e
-
-LOG
-file
-
-
-
-
-2015-01-27T07:13:05.799084Z
-28ecdebbfdd8dc2416ab9ab92574a83e
-2009-07-13T03:23:39.497349Z
-2
-SlackerLinux85
-
-cpp
-dir
-
-doc
-dir
-
-src
-dir
-
-README.id
-file
-
-
-
-
-2015-01-27T07:13:05.811084Z
-bfa123789d1cb97038dc54695a842cff
-2009-07-13T03:23:39.497349Z
-2
-SlackerLinux85
-
-COPYRIGHT
-file
-
-
-
-
-2015-01-27T07:13:05.816084Z
-b68c468bde8703605e9fa4caf11da372
-2009-07-13T03:23:39.497349Z
-2
-SlackerLinux85
-
-lburg
-dir
-
-etc
-dir
-
-README
-file
-
-
-
-
-2015-01-27T07:13:05.863084Z
-63eb3aebee8506dabf0a4772241f3a2b
-2009-07-13T03:23:39.497349Z
-2
-SlackerLinux85
-
-Makefile
-file
-
-
-
-
-2015-01-27T07:13:05.866084Z
-37c8395bc7179591880804e60afae8c1
-2009-07-13T03:23:39.497349Z
-2
-SlackerLinux85
-

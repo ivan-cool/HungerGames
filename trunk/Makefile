@@ -141,13 +141,13 @@ VERSION=$(shell grep "\#define VERSION_NUMBER" $(CMDIR)/q_shared.h | \
   sed -e 's/[^"]*"\(.*\)"/\1/')
 
 USE_SVN=
-ifeq ($(wildcard .svn),.svn)
-  SVN_REV=$(shell LANG=C svnversion .)
-  ifneq ($(SVN_REV),)
-    SVN_VERSION=$(VERSION)_SVN$(SVN_REV)
-    USE_SVN=1
-  endif
-endif
+#ifeq ($(wildcard .svn),.svn)
+#  SVN_REV=$(shell LANG=C svnversion .)
+#  ifneq ($(SVN_REV),)
+#    SVN_VERSION=$(VERSION)_SVN$(SVN_REV)
+#    USE_SVN=1
+#  endif
+#endif
 ifneq ($(USE_SVN),1)
     SVN_VERSION=$(VERSION)
 endif
