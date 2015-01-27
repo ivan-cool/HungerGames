@@ -2444,9 +2444,9 @@ void CheckExitRules( void )
     G_admin_maplog_result( "h" );
   }
  else if( level.uncondAlienWin ||
-          ( ( level.time > level.startTime + 10 ) &&
+          ( ( level.time > level.startTime + 1000 ) &&
             ( level.numHumanSpawns == 0 ) &&
-            ( level.numLiveHumanClients == 1 ) ) )
+            ( level.numLiveHumanClients <= 1 ) ) )
  {
    //HG win
    level.lastWin = PTE_ALIENS;
