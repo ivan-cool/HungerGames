@@ -263,7 +263,7 @@ void player_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int
 
     if( attacker == self || OnSameTeam( self, attacker ) )
     {
-      AddScore( attacker, -1 );
+      AddScore( attacker, 1 );
 
       // Normal teamkill penalty
       if( !g_retribution.integer )
