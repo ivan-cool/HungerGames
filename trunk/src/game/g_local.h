@@ -813,6 +813,8 @@ typedef struct
   float		    nbHeight;
   
   nbMarkers_t	    nbMarkers[ MAX_GENTITIES ];
+
+  gclient_t         *lastHumanClient;
 } level_locals_t;
 
 #define CMD_CHEAT         0x01

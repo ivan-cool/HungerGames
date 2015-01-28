@@ -1615,6 +1615,7 @@ void CalculateRanks( void )
   level.numHumanClients = 0;
   level.numLiveAlienClients = 0;
   level.numLiveHumanClients = 0;
+  level.lastHumanClient = NULL;
 
   for( i = 0; i < level.maxclients; i++ )
   {
@@ -1644,8 +1645,10 @@ void CalculateRanks( void )
         else if( level.clients[ i ].pers.teamSelection == PTE_HUMANS )
         {
           level.numHumanClients++;
-          if( level.clients[ i ].sess.sessionTeam != TEAM_SPECTATOR )
+          if( level.clients[ i ].sess.sessionTeam != TEAM_SPECTATOR ) {
             level.numLiveHumanClients++;
+            level.lastHumanClient = &level.clients[ i ];
+          }
         }
       }
     }
@@ -2431,31 +2434,31 @@ void CheckExitRules( void )
     }
   }
 
+  //HG win
   if( level.uncondHumanWin ||
       ( ( level.time > level.startTime + 1000 ) &&
-        ( level.numAlienSpawns == 0 ) &&
-        ( level.numLiveAlienClients == 0 ) ) )
+        ( level.numHumanSpawns == 0 ) &&
+        ( level.numLiveHumanClients <= 1 ) ) )
   {
-    //humans win
-    level.lastWin = PTE_HUMANS;
-    trap_SendServerCommand( -1, "print \"Humans win\n\"");
-    trap_SetConfigstring( CS_WINNER, "Humans Win" );
-    LogExit( "Humans win." );
-    G_admin_maplog_result( "h" );
+    if( level.lastHumanClient == NULL )
+    {
+      level.lastWin = PTE_NONE;
+      trap_SendServerCommand( -1, "print \"No winner\n\"" );
+      trap_SetConfigstring( CS_WINNER, "Nobody wins" );
+      LogExit( "No winner" );
+      G_admin_maplog_result( "t" );
+    }
+    else
+    {  
+      level.lastWin = PTE_HUMANS;
+      trap_SendServerCommand( -1, va("print \"%s^7 wins\n\"", level.lastHumanClient->pers.netname) );
+      trap_SendServerCommand( -1, va("cp \"%s^7 wins\n\"", level.lastHumanClient->pers.netname) );
+      trap_SetConfigstring( CS_WINNER, va("%s^7 wins", level.lastHumanClient->pers.netname) );
+      LogExit( va("%s^7 wins", level.lastHumanClient->pers.netname) );
+      G_admin_maplog_result( "h" );
+    }
   }
- else if( level.uncondAlienWin ||
-          ( ( level.time > level.startTime + 1000 ) &&
-            ( level.numHumanSpawns == 0 ) &&
-            ( level.numLiveHumanClients <= 1 ) ) )
- {
-   //HG win
-   level.lastWin = PTE_ALIENS;
-   trap_SendServerCommand( -1, "print \"player wins""\n\"");
-   trap_SetConfigstring( CS_WINNER, "player wins" );
-   LogExit( "player wins" );
-   G_admin_maplog_result( "a" );
- }
-  }
+}
 
 
 
