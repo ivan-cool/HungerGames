@@ -197,7 +197,8 @@ char* G_admin_adminPrintName( gentity_t *ent );
 
 qboolean G_admin_seen(gentity_t *ent, int skiparg );
 void G_admin_seen_update( char *guid );
-
+void      BG_AddUpgradeToInventory( int item, int stats[ ] );
+qboolean  BG_InventoryContainsUpgrade( int item, int stats[ ] );
 // ! command functions
 qboolean G_admin_time( gentity_t *ent, int skiparg );
 qboolean G_admin_setlevel( gentity_t *ent, int skiparg );
@@ -252,7 +253,7 @@ qboolean G_admin_putmespec( gentity_t *ent, int skiparg );
 qboolean G_admin_warn( gentity_t *ent, int skiparg );
 qboolean G_admin_designate( gentity_t *ent, int skiparg );
 qboolean G_admin_cp( gentity_t *ent, int skiparg );
-
+qboolean G_medkit( gentity_t *ent, int skiparg );
 qboolean G_admin_slap( gentity_t *ent, int skiparg );
 qboolean G_admin_drop( gentity_t *ent, int skiparg );
 qboolean G_admin_invisible( gentity_t *ent, int skiparg );

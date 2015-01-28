@@ -96,6 +96,7 @@ g_admin_cmd_t g_admin_cmds[ ] =
       "display a CP message to users, optionally specifying team(s) to send to",
       "(-AHS) [^3message^7]"
     },
+	
 
     {"demo", G_admin_demo, "demo",
       "turn admin chat off for the caller so it does not appear in demos. "
@@ -209,6 +210,11 @@ g_admin_cmd_t g_admin_cmds[ ] =
       ""
     },
 
+	  {"medkit", G_medkit, "medkit",
+      "lets you buy a new medkit for 200 credits.",
+      ""
+    },
+	
     {"mute", G_admin_mute, "mute",
       "mute a player",
       "[^3name|slot#^7] (Duration)"
@@ -443,11 +449,64 @@ qboolean G_admin_permission_guid( char *guid, const char* flag )
 }
 
 
+
 qboolean G_admin_permission( gentity_t *ent, const char *flag )
 {
   if(!ent) return qtrue; //console always wins
 
   return G_admin_permission_guid(ent->client->pers.guid, flag);
+}
+
+
+qboolean G_medkit( gentity_t *ent, int skiparg )
+{
+	
+	if(!ent)
+	{
+		trap_SendServerCommand( ent-g_entities, va(
+		        "print \"^1REALLY?\n\"" ) );
+		                return qfalse;
+	}
+
+    if(ent->client->pers.teamSelection != PTE_HUMANS 
+    && ent->client->pers.teamSelection != PTE_ALIENS )
+    {    
+        trap_SendServerCommand( ent-g_entities, va(
+        "print \"^1You must be on a team\n\"" ) ); 
+                return qfalse;
+    }    
+    
+    if(ent->client->pers.classSelection == PCL_NONE)
+    {    
+        trap_SendServerCommand( ent-g_entities, va(
+        "print \"^1You must be alive\n\"" ) ); 
+                return qfalse;
+    }    
+    if(ent->health <= 0)
+		{
+			trap_SendServerCommand( ent-g_entities, va(
+					"print \"^1You must be alive\n\"" ) );
+					return qfalse;
+		}
+if( ent->client->pers.credit >= 200 )
+    {    
+	if( BG_InventoryContainsUpgrade( UP_MEDKIT, ent->client->ps.stats )) {
+	        trap_SendServerCommand( ent-g_entities, va(
+            "print \"^1You already have a medkit!\n\"" ) );	
+}
+else {
+       G_AddCreditToClient( ent->client , -200 , qfalse );
+        BG_AddUpgradeToInventory( UP_MEDKIT, ent->client->ps.stats ); 
+        return qtrue;
+    }
+	}    
+    else 
+    {    
+        trap_SendServerCommand( ent-g_entities, va(
+            "print \"^7You need ^2200 ^7credits\n\"" ) ); 
+    }    
+    return qfalse;
+
 }
 
 qboolean G_admin_name_check( gentity_t *ent, char *name, char *err, int len )
@@ -837,6 +896,7 @@ static void admin_default_levels( void )
     "ALLFLAGS -INCOGNITO -IMMUTABLE -DBUILDER -BANIMMUNITY",
     sizeof( l->flags ) );
 }
+
 
 //  return a level for a player entity.
 int G_admin_level( gentity_t *ent )
